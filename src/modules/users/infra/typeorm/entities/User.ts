@@ -5,9 +5,11 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { IUser } from '@modules/users/domain/models/IUser';
 
 @Entity('users')
-class User {
+class User implements IUser {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -18,10 +20,8 @@ class User {
     email: string;
 
     @Column()
+    @Exclude()
     password: string;
-
-    @Column()
-    avatar: string;
 
     @CreateDateColumn()
     created_at: Date;
